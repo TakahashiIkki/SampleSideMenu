@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import SideMenu
 
-class LeftMenuViewController: UIViewController {
+class LeftMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    let menus = ["Menu 1", "Menu 2", "Mennu3"]
+    
+    @IBOutlet weak var myTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +27,18 @@ class LeftMenuViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menus.count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let menu = menus[indexPath.row]
+        
+        cell.textLabel?.text = menu
+        
+        return cell
+    }
 
 }
